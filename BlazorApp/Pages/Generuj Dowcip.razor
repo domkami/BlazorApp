@@ -1,0 +1,32 @@
+﻿@page "/Generuj Dowcip"
+@inject HttpClient Http
+
+<PageTitle>Generuj Dowcip</PageTitle>
+
+<h1>Programistyczny Dowcip</h1>
+<br />
+
+<p>@Joke</p>
+
+<button class="btn btn-primary" @onclick="GenerateJoke">Generuj Dowcip</button>
+
+@code {
+    private string Joke;
+
+    private string[] Jokes = new string[]
+    {
+        "Dlaczego programiści nie lubią chodzić na spacery? Bo mają problem z wątkami.",
+        "Jak wygląda życie programisty? 01001000 01100101 01100001 01101100 01110100 01101000 01111001.",
+        "Czym różni się komputer od człowieka? Komputer nie musi czytać tej wiadomości dwa razy, by ją zrozumieć.",
+        "Dlaczego programiści zawsze zasłaniają oczy podczas kodowania? Bo wiedzą, że `try { } catch { }` nie zawsze działa.",
+        "Dlaczego programiści są dobrymi Dj'ami? Bo mają dużo bitów."
+    };
+
+    private Random random = new Random();
+
+    private void GenerateJoke()
+    {
+        int index = random.Next(0, Jokes.Length);
+        Joke = Jokes[index];
+    }
+}

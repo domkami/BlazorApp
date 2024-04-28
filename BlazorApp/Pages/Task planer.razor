@@ -1,0 +1,38 @@
+﻿@page "/Task Planer"
+
+<h3>Zaplanuj swoje zadania!</h3>
+<br />
+
+<div>
+    <h4>Planer zadań</h4>
+    <input type="text" @bind="newTask" placeholder="Dodaj nowe zadanie" />
+    <button @onclick="DodajZadanie">Dodaj</button>
+    <ul>
+        @foreach (var task in tasks)
+        {
+            <li>
+                @task
+                <button @onclick="() => UsunZadanie(task)">Usuń</button>
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+    private List<string> tasks = new List<string>();
+    private string newTask;
+
+    private void DodajZadanie()
+    {
+        if (!string.IsNullOrWhiteSpace(newTask))
+        {
+            tasks.Add(newTask);
+            newTask = string.Empty;
+        }
+    }
+
+    private void UsunZadanie(string task)
+    {
+        tasks.Remove(task);
+    }
+}
